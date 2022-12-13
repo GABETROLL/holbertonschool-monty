@@ -83,6 +83,7 @@ int parse_command(char *line, int line_number)
 		if (token)
 		{
 			value = atoi(token);
+
 			if (value || strcmp(token, "0") == 0)
 			{
 				push(value);
@@ -96,6 +97,10 @@ int parse_command(char *line, int line_number)
 		pall();
 		return (1);
 	}
+	else
+	{
+		printf("L%d: unknown instruction %s\n", line_number, token);
+	}
 
 	return (-1);
 }
@@ -106,7 +111,7 @@ int main(int argc, char **argv)
 
 	size_t line_buffer_size = 0;
 	char *line = NULL;
-	int line_index = 0;
+	int line_index = 1;
 
 	if (argc != 2)
 	{
