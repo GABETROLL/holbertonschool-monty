@@ -105,9 +105,7 @@ int parse_command(char *line, int line_number)
 		return (1);
 	}
 	else
-	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-	}
 
 	return (-1);
 }
@@ -165,20 +163,19 @@ int main(int argc, char **argv)
 	{
 		int line_result = parse_command(line, line_index);
 
-		/* reset loop */
-		free(line);
-		line_buffer_size = 0;
-		line = NULL;
-
 		if (line_result == -1)
 		{
 			free_stack();
+			free(line);
+			fclose(fp);
 			return (EXIT_FAILURE);
 		}
 
 		line_index++;
 	}
 	free_stack();
+	free(line);
+	fclose(fp);
 
 	return (EXIT_SUCCESS);
 }
