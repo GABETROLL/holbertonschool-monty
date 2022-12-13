@@ -105,6 +105,16 @@ int parse_command(char *line, int line_number)
 	return (-1);
 }
 
+/**
+ * main - Parse monty file from shell argument 1
+ *
+ * @argc: shell argument count
+ * @argv: shell arguments
+ *
+ * Return: EXIT_SUCCESS if interpreting the monty
+ * file was successful (including the arguments
+ * being 2 and the file existing), otherwise EXIT_FAILURE
+ */
 int main(int argc, char **argv)
 {
 	FILE *fp;
