@@ -15,7 +15,7 @@ void pall(void)
 
 	while (node)
 	{
-		printf("%d\n", node->n);
+		fprintf(stderr, "%d\n", node->n);
 		node = node->prev;
 	}
 }
@@ -38,13 +38,20 @@ void pall(void)
  *
  * If '*stack' is NULL, the new node becomes
  * the head.
+ *
+ * @value: value to put into new node
+ *
+ * Return: 1 if successful, -1 otherwise
  */
 int push(int value)
 {
 	stack_t *new_head = malloc(sizeof(stack_t));
 
 	if (!new_head)
+	{
+		fputs("Error: malloc failed", stderr);
 		return (-1);
+	}
 
 	new_head->n = value;
 	new_head->prev = stack;
@@ -90,7 +97,7 @@ int parse_command(char *line, int line_number)
 				return (1);
 			}
 		}
-		printf("L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 	}
 	else if (strcmp(token, "pall") == 0)
 	{
@@ -99,7 +106,7 @@ int parse_command(char *line, int line_number)
 	}
 	else
 	{
-		printf("L%d: unknown instruction %s\n", line_number, token);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 	}
 
 	return (-1);
@@ -125,7 +132,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("USAGE: %s file\n", argv[0]);
+		fprintf(stderr, "USAGE: %s file\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
 
@@ -133,7 +140,7 @@ int main(int argc, char **argv)
 
 	if (!fp)
 	{
-		printf("Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
 
