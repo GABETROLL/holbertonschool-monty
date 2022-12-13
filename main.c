@@ -80,28 +80,24 @@ int parse_command(char *line, int line_number)
 		int value;
 
 		token = strtok(NULL, " \n");
-		if (!token)
+		if (token)
 		{
-			printf("L%d: usage: push integer\n", line_number);
-			return (-1);
+			value = atoi(token);
+			if (value || strcmp(token, "0") == 0)
+			{
+				push(value);
+				return (1);
+			}
 		}
-
-		value = atoi(token);
-
-		if (value || strcmp(token, "0") == 0)
-			push(value);
-		else
-			return(-1);
+		printf("L%d: usage: push integer\n", line_number);
 	}
 	else if (strcmp(token, "pall") == 0)
-		pall();
-	else
 	{
-		printf("L%d; unknown instruction %s\n", line_number, token);
-		return (-1);
+		pall();
+		return (1);
 	}
 
-	return (1);
+	return (-1);
 }
 
 int main(int argc, char **argv)
