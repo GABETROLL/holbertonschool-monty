@@ -113,6 +113,23 @@ int parse_command(char *line, int line_number)
 }
 
 /**
+ * free_stack - Frees all nodes in stack 'stack'
+ * Return: nothing
+ */
+void free_stack(void)
+{
+	stack_t *a = stack;
+	stack_t *b;
+
+	while (a)
+	{
+		b = a->prev;
+		free(a);
+		a = b;
+	}
+}
+
+/**
  * main - Parse monty file from shell argument 1
  *
  * @argc: shell argument count
@@ -154,10 +171,14 @@ int main(int argc, char **argv)
 		line = NULL;
 
 		if (line_result == -1)
+		{
+			free_stack();
 			return (EXIT_FAILURE);
+		}
 
 		line_index++;
 	}
+	free_stack();
 
 	return (EXIT_SUCCESS);
 }
