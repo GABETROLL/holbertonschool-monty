@@ -39,6 +39,18 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *stack;
+/*
+ * all program instructions
+ *
+ * They all set line_status to EXIT_FAILURE
+ * when something goes wrong and print the
+ * error
+ *
+ * (pall doesn't have any, I think...)
+ */
+void pall(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+
+extern int line_status;
 #endif
 
