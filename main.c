@@ -100,7 +100,9 @@ int main(int argc, char **argv)
 	size_t line_buffer_size = 0;
 	unsigned int line_number = 1;
 
-	instruction_t instructions[] = {{"pall", pall}, {"push", push}, {"pint", pint}, {NULL, NULL}};
+	instruction_t instructions[] = {{"pall", pall}, {"push", push},
+		{"pint", pint},
+		{NULL, NULL}};
 
 	stack_t *stack = NULL;
 
