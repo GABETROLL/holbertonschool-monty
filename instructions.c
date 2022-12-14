@@ -1,6 +1,6 @@
 #include "monty.h"
 
-/* 'stack' IS A GLOBAL VARIABLE USED IN 'main.c'. */
+/* 'line_status' IS A GLOBAL VARIABLE USED IN 'main.c'. */
 
 /**
  * pall - print all
@@ -9,7 +9,7 @@
  *
  * @stack: "global" stack pointer
  * to print all ints from
- * Please don't make it NULL.
+ * Please don't make it NULL, check 'monty.h'
  *
  * @line_number: line number in monty file
  * to print in case something goes wrong
@@ -54,7 +54,7 @@ void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * the head.
  *
  * @stack: "global" stack to push number to
- * Please don't make it NULL.
+ * Please don't make it NULL, check 'monty.h'
  *
  * @line_number: line number in monty file we're
  * currently trying to execute in case
@@ -111,7 +111,9 @@ void push(stack_t **stack, unsigned int line_number)
  * if the stack is empty, print error message and
  * set error code in line_status
  *
- * @stack: stack to print top int of
+ * @stack: stack to print top int of.
+ * Please don't make it NULL, check 'monty.h'.
+ *
  * @line_number: line number of monty file to print
  * if the stack is empty
  *
@@ -127,5 +129,37 @@ void pint(stack_t **stack, unsigned int line_number)
 	}
 
 	printf("%d\n", (**stack).n);
+}
+
+/**
+ * pop - If the stack isn't empty, pop "pops"
+ * and frees the top node of the stack.
+ *
+ * If the stack is empty, it prints an error message
+ * and sets 'line_status' to 'EXIT_FAILURE'.
+ *
+ * @stack: stack to pop from.
+ * Please don't make it NULL, check monty.h
+ *
+ * @line_number: line currently being read from
+ * monty file; to print which line caused an error
+ * if this function causes it
+ *
+ * Return: void
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *head;
+
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		line_status = EXIT_FAILURE;
+		return;
+	}
+
+	head = *stack;
+	*stack = head->prev;
+	free(head);
 }
 
