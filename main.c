@@ -102,15 +102,11 @@ void push(stack_t **stack, unsigned int line_number)
 		line_status = EXIT_FAILURE;
 		return;
 	}
-
 	value = atoi(next_token);
-
 	/*
 	 * atoi returns 0 when next_token isn't a valid number,
 	 * as well as when the number was a valid 0.
-	 *
 	 * So, we have to check for the "0" edge case.
-	 *
 	 * If it wasn't "0", we'll assume it's wrong,
 	 * for now...
 	 */
@@ -120,7 +116,6 @@ void push(stack_t **stack, unsigned int line_number)
 		line_status = EXIT_FAILURE;
 		return;
 	}
-
 	new_head = malloc(sizeof(stack_t));
 	if (!new_head)
 	{
@@ -128,7 +123,6 @@ void push(stack_t **stack, unsigned int line_number)
 		line_status = EXIT_FAILURE;
 		return;
 	}
-
 	new_head->n = value;
 	new_head->prev = *stack;
 	new_head->next = NULL;
@@ -147,9 +141,11 @@ void push(stack_t **stack, unsigned int line_number)
  * Please don't make it NULL.
  *
  * @line: line to parse
- * @fp: file to close when an error occurs
  * @line_number: to print line number when error occurs
  * messages
+ * @instructions: an array of structs containing
+ * each monty opcode and its corresponding
+ * function
  *
  * Return: Nothing
  */
@@ -181,7 +177,8 @@ void parse_command(stack_t **stack,
 	 * we should only print it line_status is
 	 * still EXIT_SUCCESS and hasn't been
 	 * affected by any function, to prevent more
-	 * than one error message*/
+	 * than one error message
+	 */
 	if (line_status == EXIT_SUCCESS)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, token);
@@ -225,7 +222,8 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	while (line_status == EXIT_SUCCESS && getline(&line, &line_buffer_size, fp) != -1)
+	while (line_status == EXIT_SUCCESS
+			&& getline(&line, &line_buffer_size, fp) != -1)
 	{
 		parse_command(&stack, line, line_number, instructions);
 		line_number++;
