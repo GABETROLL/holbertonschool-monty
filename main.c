@@ -15,7 +15,7 @@ void pall(void)
 
 	while (node)
 	{
-		fprintf(stderr, "%d\n", node->n);
+		printf("%d\n", node->n);
 		node = node->prev;
 	}
 }
