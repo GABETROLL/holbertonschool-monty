@@ -101,10 +101,10 @@ int main(int argc, char **argv)
 	unsigned int line_number = 1;
 
 	instruction_t instructions[] = {{"push", push}, {"pop", pop},
-		{"swap", swap},
-		{"add", add},
+		{"swap", swap}, {"nop", nop},
+		{"add", add}, {"sub", sub}, {"mul", mul},
+		{"div", div_}, {"mod", mod},
 		{"pall", pall}, {"pint", pint},
-		{"nop", nop},
 		{NULL, NULL}};
 
 	stack_t *stack = NULL;
