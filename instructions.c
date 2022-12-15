@@ -108,8 +108,8 @@ void push(stack_t **stack, unsigned int line_number)
 
 /**
  * pint - Prints top int in the stack 'stack'
- * if the stack is empty, print error message and
- * set error code in line_status
+ * if the stack is empty, print error message to
+ * stderr and sets error code in line_status
  *
  * @stack: stack to print top int of.
  * Please don't make it NULL, check 'monty.h'.
@@ -136,7 +136,7 @@ void pint(stack_t **stack, unsigned int line_number)
  * and frees the top node of the stack.
  *
  * If the stack is empty, it prints an error message
- * and sets 'line_status' to 'EXIT_FAILURE'.
+ * to stderr and sets 'line_status' to 'EXIT_FAILURE'.
  *
  * @stack: stack to pop from.
  * Please don't make it NULL, check monty.h
@@ -145,7 +145,7 @@ void pint(stack_t **stack, unsigned int line_number)
  * monty file; to print which line caused an error
  * if this function causes it
  *
- * Return: void
+ * Return: nothing
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
@@ -161,5 +161,50 @@ void pop(stack_t **stack, unsigned int line_number)
 	head = *stack;
 	*stack = head->prev;
 	free(head);
+}
+
+/**
+ * swap - If the stack contains at least 2
+ * elements, 'swap' will swap the top 2
+ * 'n' values of the top two nodes,
+ * NOT THE NODES THEMSELVES!!!
+ *
+ * If the stack doesn't have at least two
+ * nodes to swap, it will
+ * print an error message to stderr and set
+ * line_status to EXIT_FAILURE.
+ *
+ * @stack: stack to swap two values from its
+ * top.
+ * Please don't make it NULL, check monty.h
+ *
+ * @line_number: line currently being read from
+ * monty file; to print which line caused an
+ * error if this function causes it
+ *
+ * Return: nothing
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	/* to get the top and prev to top nodes */
+	stack_t *top = *stack;
+	stack_t *prev = NULL;
+	/* to swap their two 'n' attributes */
+	int temp;
+
+	if (top)
+		prev = top->prev;
+
+	/* if the stack doesn't have two top nodes: */
+	if (!top || !prev)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		line_status = EXIT_FAILURE;
+		return;
+	}
+
+	temp = top->n;
+	top->n = prev->n;
+	prev->n = temp;
 }
 

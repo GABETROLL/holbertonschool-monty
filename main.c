@@ -101,6 +101,7 @@ int main(int argc, char **argv)
 	unsigned int line_number = 1;
 
 	instruction_t instructions[] = {{"push", push}, {"pop", pop},
+		{"swap", swap},
 		{"pall", pall}, {"pint", pint},
 		{NULL, NULL}};
 
