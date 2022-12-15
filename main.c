@@ -104,6 +104,7 @@ int main(int argc, char **argv)
 		{"swap", swap},
 		{"add", add},
 		{"pall", pall}, {"pint", pint},
+		{"nop", nop},
 		{NULL, NULL}};
 
 	stack_t *stack = NULL;
