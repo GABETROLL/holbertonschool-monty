@@ -158,3 +158,4 @@ void swap(stack_t **stack, unsigned int line_number)
 	prev->n = temp;
 }
 
+void add(
