@@ -198,3 +198,15 @@ void add(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 
+/**
+ * nop - Does nothing
+ *
+ * @stack: stack in this monty program
+ * (check monty.h),
+ * to make this function same as oter functions
+ *
+ * @line_number: line currently being read from
+ * monty file; to make this function same as other functions
+ */
+void nop(stack_t **stack, unsigned int line_number) { }
+
