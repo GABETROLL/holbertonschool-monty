@@ -102,6 +102,7 @@ int main(int argc, char **argv)
 
 	instruction_t instructions[] = {{"push", push}, {"pop", pop},
 		{"swap", swap},
+		{"add", add},
 		{"pall", pall}, {"pint", pint},
 		{NULL, NULL}};
 

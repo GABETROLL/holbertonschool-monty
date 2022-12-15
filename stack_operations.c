@@ -158,4 +158,43 @@ void swap(stack_t **stack, unsigned int line_number)
 	prev->n = temp;
 }
 
-void add(
+/**
+ * add - Adds the 'n' attributes of the
+ * top two nodes in the stack 'stack'
+ * to the node previous to the top node,
+ * then pops the top node, if there are
+ * at least two nodes in the stack.
+ *
+ * If there aren't, 'add' just prints an error
+ * message and sets 'line_status' to
+ * EXIT_FALURE.
+ *
+ * @stack: stack to add two values from its
+ * top.
+ * Please don't make it NULL, check monty.h
+ *
+ * @line_number: line currently being read from
+ * monty file; to print which line caused an
+ * error if this function causes it
+ *
+ * Return: nothing
+ */
+void add(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top = *stack;
+	stack_t *prev = NULL;
+
+	if (top)
+		prev = top->prev;
+
+	if (!top || !prev)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		line_status = EXIT_FAILURE;
+		return;
+	}
+
+	prev->n += top->n;
+	pop(stack, line_number);
+}
+
